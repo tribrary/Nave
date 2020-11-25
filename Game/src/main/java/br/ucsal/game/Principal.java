@@ -15,10 +15,10 @@ public class Principal extends JFrame{
 	
 	private void initUI() throws IOException {
 		add(new Jogo());
+		setTitle("Jogo");
 		pack();
-		//setSize(300, 300);
-		setTitle("Aplicação");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
 		setLocationRelativeTo(null);
 	}
 	

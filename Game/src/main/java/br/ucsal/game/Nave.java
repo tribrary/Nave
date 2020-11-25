@@ -2,39 +2,32 @@ package br.ucsal.game;
 
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 
-public class Nave {
+public class Nave extends Sprite{
 
 	private int dx;
 	private int dy;
-	private int x;
-	private int y;
-	private Image image;
+	private int alcance;
 	
-	public Nave() {
+	private ArrayList<Tiro> tiros;
+	
+	public Nave(int x, int y, int alcance) {
+		super(x, y);
+		this.alcance = alcance;
 		initNave();
 	}
 	
 	private void initNave() {
-		ImageIcon ii = new ImageIcon("src/main/resources/nave.png");
-		image = ii.getImage();
-		x = 40;
-		y = 60;
+		tiros = new ArrayList<Tiro>();
+		carregarImagem("/nave.png");
+		dimensionarImagem();
 	}
 	
 	public void move() {
 		x += dx;
 		y += dy;
-	}
-	
-	public int getX() {
-		return x;
-	}
-	
-	public int getY() {
-		return y;
 	}
 	
 	public Image getImage() {
@@ -43,6 +36,9 @@ public class Nave {
 	
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
+		if(key == KeyEvent.VK_SPACE) {
+			atirar();
+		}
 		if(key == KeyEvent.VK_LEFT) {
 			dx = -1;
 		}
@@ -71,5 +67,13 @@ public class Nave {
 		if(key == KeyEvent.VK_DOWN) {
 			dy = 0;
 		}
+	}
+	
+	private void atirar() {
+		tiros.add(new Tiro(x + width, y + height / 2, alcance));
+	}
+	
+	public ArrayList<Tiro> getTiros(){
+		return tiros;
 	}
 }
