@@ -13,7 +13,6 @@ public class Alien extends Sprite {
 	public Alien(int x, int y) {
 		this.x = x;
 		this.y = y;
-
 		contador ++;
 		if (contador % 2 == 0) {
 			carregarImagem("/images/alien1.png");
