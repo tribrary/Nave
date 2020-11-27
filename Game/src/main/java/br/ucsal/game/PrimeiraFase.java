@@ -32,16 +32,18 @@ public class PrimeiraFase extends JPanel implements ActionListener {
 
 	private boolean emJogo;
 	
+	private boolean win;
+	
 	private int[][] coordenadas = { {760, 20}, {700, 100}, {640, 180}, {580, 260}, {640, 320}, {700, 400}, {760, 480},
 			{1060, 20}, {1000, 100}, {940, 180}, {880, 260}, {940, 320}, {1000, 400}, {1060, 480},
 			{1360, 20}, {1360, 100}, {1360, 180}, {1360, 260}, {1360, 320}, {1360, 400}, {1360, 480},
 			{1420, 20}, {1420, 100}, {1420, 180}, {1420, 260}, {1420, 320}, {1420, 400}, {1420, 480},
 			{1760, 20}, {1700, 100}, {1640, 180}, {1580, 260}, {1640, 320}, {1700, 400}, {1760, 480},
-			{580, 20}, {700, 100}, {640, 180}, {760, 260}, {640, 320}, {700, 400}, {580, 480},
 			{2000, 20}, {2160, 100}, {2220, 180}, {2280, 260}, {2220, 320}, {2160, 400}, {2000, 480},
 			{1569, 20}, {7450, 100}, {650, 180}, {5250, 260}, {2360, 320}, {1600, 400}, {950, 480},
 			{2400, 20}, {2460, 100}, {2520, 180}, {2600, 260}, {2660, 320}, {2720, 400}, {2800, 480},
-			{3280, 20}, {3200, 100}, {3120, 180}, {3060, 260}, {3000, 320}, {2920, 400}, {2860, 480},};
+			{3280, 20}, {3200, 100}, {3120, 180}, {3060, 260}, {3000, 320}, {2920, 400}, {2860, 480},
+			};
 
 	public PrimeiraFase() {
 		setFocusable(true);
@@ -71,7 +73,6 @@ public class PrimeiraFase extends JPanel implements ActionListener {
 	public void paint(Graphics g) {
 		Graphics2D graficos = (Graphics2D) g;
 		
-		
 		graficos.drawImage(fundo, 0, 0, null);
 
 
@@ -92,6 +93,9 @@ public class PrimeiraFase extends JPanel implements ActionListener {
 
 			graficos.setColor(Color.white);
 			graficos.drawString("Ameaças: " + inimigos.size(), 5, 15);
+			
+			
+			
 
 		} else {
 			Thread.currentThread();
@@ -100,10 +104,17 @@ public class PrimeiraFase extends JPanel implements ActionListener {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
-			ImageIcon fimJogo = new ImageIcon(Iniciar.class.getResource("/images/game-over.png"));
-
-			graficos.drawImage(fimJogo.getImage(), 0, 0, null);
+			
+			if(!win) {
+				ImageIcon fimJogo = new ImageIcon(Iniciar.class.getResource("/images/win.png"));
+				
+				graficos.drawImage(fimJogo.getImage(), 0, 0, null);
+			}else {
+				ImageIcon fimJogo = new ImageIcon(Iniciar.class.getResource("/images/game-over.png"));
+				
+				graficos.drawImage(fimJogo.getImage(), 0, 0, null);								
+			}
+			
 		}
 		g.dispose();
 	}
@@ -111,6 +122,7 @@ public class PrimeiraFase extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (inimigos.size() == 0) {
 			emJogo = false;
+			win = false;
 		}
 
 		List<Disparo> disparos = nave.getDisparos();
@@ -171,6 +183,7 @@ public class PrimeiraFase extends JPanel implements ActionListener {
 					tempoAlien.setVisible(false);
 					tempoDisparo.setVisible(false);
 				}
+				
 			}
 		}
 	}
@@ -183,6 +196,7 @@ public class PrimeiraFase extends JPanel implements ActionListener {
 				emJogo = true;
 				nave = new Nave();
 				inicializarAliens();
+				win = true;
 			}
 
 			nave.keyPressed(e);
