@@ -19,7 +19,7 @@ public class Nave extends Sprite {
 		disparos = new ArrayList<Disparo>();
 
 		this.x = 100;
-		this.y = 100;
+		this.y = 220;
 	}
 
 	public void move() {

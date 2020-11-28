@@ -21,7 +21,7 @@ public class PrimeiraFase extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	
-	private final int DELAY = 12;
+	private final int DELAY = 50;
 	private Image fundo;
 
 	private Nave nave;
@@ -40,7 +40,7 @@ public class PrimeiraFase extends JPanel implements ActionListener {
 			{1420, 20}, {1420, 100}, {1420, 180}, {1420, 260}, {1420, 320}, {1420, 400}, {1420, 480},
 			{1760, 20}, {1700, 100}, {1640, 180}, {1580, 260}, {1640, 320}, {1700, 400}, {1760, 480},
 			{2000, 20}, {2160, 100}, {2220, 180}, {2280, 260}, {2220, 320}, {2160, 400}, {2000, 480},
-			{1569, 20}, {7450, 100}, {650, 180}, {5250, 260}, {2360, 320}, {1600, 400}, {950, 480},
+			{1569, 20}, {7450, 100}, {5250, 260}, {2360, 320}, {1600, 400}, {950, 480},
 			{2400, 20}, {2460, 100}, {2520, 180}, {2600, 260}, {2660, 320}, {2720, 400}, {2800, 480},
 			{3280, 20}, {3200, 100}, {3120, 180}, {3060, 260}, {3000, 320}, {2920, 400}, {2860, 480},
 			};
@@ -82,13 +82,13 @@ public class PrimeiraFase extends JPanel implements ActionListener {
 			List<Disparo> disparos = nave.getDisparos();
 
 			for (int i = 0; i < disparos.size(); i++) {
-				Disparo m = (Disparo) disparos.get(i);
-				graficos.drawImage(m.getImage(), m.getX(), m.getY(), this);
+				Disparo disparo = (Disparo) disparos.get(i);
+				graficos.drawImage(disparo.getImage(), disparo.getX(), disparo.getY(), this);
 			}
 
 			for (int i = 0; i < inimigos.size(); i++) {
-				Alien in = inimigos.get(i);
-				graficos.drawImage(in.getImage(), in.getX(), in.getY(), this);
+				Alien alien = inimigos.get(i);
+				graficos.drawImage(alien.getImage(), alien.getX(), alien.getY(), this);
 			}
 
 			graficos.setColor(Color.white);
@@ -198,7 +198,6 @@ public class PrimeiraFase extends JPanel implements ActionListener {
 				inicializarAliens();
 				win = true;
 			}
-
 			nave.keyPressed(e);
 		}
 
